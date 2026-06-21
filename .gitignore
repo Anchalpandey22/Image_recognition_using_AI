@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+uploads/*
+!uploads/.gitkeep
+history/*.db
+reports/*.pdf
+reports/*.csv
+logs/*.log
+model/*.h5
+model/*.pkl
+model/*.png
+.DS_Store

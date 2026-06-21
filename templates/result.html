@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}VisionAI - Result #{{ record.id }}{% endblock %}
+
+{% block content %}
+<section class="container page-section">
+  <a href="{{ url_for('history') }}" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to history</a>
+
+  <div class="row g-4 mt-3">
+    <div class="col-lg-5">
+      <div class="card app-card">
+        <div class="card-body text-center">
+          <img src="{{ url_for('static_upload', filename=record.filename) }}" class="result-thumb-large" alt="{{ record.prediction }}">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="card app-card">
+        <div class="card-body">
+          <h5 class="card-title-custom"><i class="fa-solid fa-list-check"></i> Prediction Details</h5>
+          <h3 class="result-label">{{ record.prediction }}</h3>
+          <div class="confidence-wrap">
+            <div class="d-flex justify-content-between">
+              <span>Confidence</span>
+              <span class="fw-bold">{{ record.confidence }}%</span>
+            </div>
+            <div class="progress confidence-bar">
+              <div class="progress-bar confidence-fill" style="width: {{ record.confidence }}%"></div>
+            </div>
+          </div>
+
+          {% if top5 %}
+          <h6 class="top5-heading mt-4">Top 5 Predictions</h6>
+          <ul class="top5-list">
+            {% for item in top5 %}
+            <li>
+              <span class="top5-label">{{ item.label }}</span>
+              <div class="top5-bar-wrap"><div class="top5-bar" style="width: {{ item.confidence }}%"></div></div>
+              <span class="top5-pct">{{ item.confidence }}%</span>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          <p class="text-muted mt-3 mb-0"><i class="fa-solid fa-calendar"></i> {{ record.date }} &nbsp; <i class="fa-solid fa-clock"></i> {{ record.time }} &nbsp; <span class="badge-model">{{ 'Custom Model' if record.model_used == 'custom' else 'Pretrained Model' }}</span></p>
+
+          <a href="{{ url_for('download_report', record_id=record.id) }}" class="btn btn-outline-app mt-3">
+            <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

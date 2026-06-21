@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}VisionAI - Dashboard{% endblock %}
+
+{% block content %}
+<section class="container page-section">
+  <h2 class="page-title">Dashboard</h2>
+  <p class="page-sub">A quick overview of everything VisionAI has recognized so far.</p>
+
+  <div class="row g-3 mt-3">
+    <div class="col-6 col-lg-3">
+      <div class="stat-card">
+        <i class="fa-solid fa-images stat-icon"></i>
+        <h3 class="stat-value">{{ total }}</h3>
+        <p class="stat-label">Total Predictions</p>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card">
+        <i class="fa-solid fa-calendar-day stat-icon"></i>
+        <h3 class="stat-value">{{ today_count }}</h3>
+        <p class="stat-label">Today's Predictions</p>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card">
+        <i class="fa-solid fa-crown stat-icon"></i>
+        <h3 class="stat-value text-truncate">{{ most_predicted }}</h3>
+        <p class="stat-label">Most Predicted Class</p>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="stat-card">
+        <i class="fa-solid fa-gauge-high stat-icon"></i>
+        <h3 class="stat-value">{{ avg_confidence }}%</h3>
+        <p class="stat-label">Avg. Confidence</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mt-4">
+    <div class="col-lg-6">
+      <div class="card app-card">
+        <div class="card-body">
+          <h5 class="card-title-custom"><i class="fa-solid fa-chart-pie"></i> Class Distribution</h5>
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card app-card">
+        <div class="card-body">
+          <h5 class="card-title-custom"><i class="fa-solid fa-chart-column"></i> Prediction Counts</h5>
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card app-card mt-4">
+    <div class="card-body">
+      <h5 class="card-title-custom"><i class="fa-solid fa-clock-rotate-left"></i> Recent Uploads</h5>
+      {% if recent %}
+      <div class="recent-grid">
+        {% for r in recent %}
+        <div class="recent-item">
+          <img src="{{ url_for('static_upload', filename=r.filename) }}" alt="{{ r.prediction }}">
+          <div class="recent-overlay">
+            <span>{{ r.prediction }}</span>
+            <small>{{ r.confidence }}%</small>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">No uploads yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+  const chartLabels = {{ chart_labels | safe }};
+  const chartValues = {{ chart_values | safe }};
+  const palette = ['#5b3cf4', '#3d6bff', '#8a6bff', '#3ed0d6', '#ff7eb6', '#ffb74d', '#6ee7b7', '#f87171'];
+
+  if (chartLabels.length > 0) {
+    new Chart(document.getElementById('pieChart'), {
+      type: 'doughnut',
+      data: { labels: chartLabels, datasets: [{ data: chartValues, backgroundColor: palette }] },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: { labels: chartLabels, datasets: [{ label: 'Predictions', data: chartValues, backgroundColor: '#5b3cf4', borderRadius: 6 }] },
+      options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+    });
+  }
+</script>
+{% endblock %}

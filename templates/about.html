@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}VisionAI - About{% endblock %}
+
+{% block content %}
+<section class="container page-section">
+  <h2 class="page-title">About VisionAI</h2>
+  <p class="page-sub">An end-to-end image recognition platform, built as a complete AI + web engineering project.</p>
+
+  <div class="row g-4 mt-3">
+    <div class="col-lg-8">
+      <div class="card app-card">
+        <div class="card-body">
+          <h5 class="card-title-custom"><i class="fa-solid fa-brain"></i> How it works</h5>
+          <p>VisionAI uses a Convolutional Neural Network (CNN) to classify images. An uploaded photo is resized,
+          normalized, and passed through trained convolution and pooling layers that progressively learn shapes,
+          textures, and patterns. The final layer produces a probability distribution across all known classes,
+          and the top five most likely matches are returned with their confidence scores.</p>
+          <p>By default, the system runs on a MobileNetV2 model pretrained on ImageNet (1,000 everyday object
+          classes), so predictions work immediately without any training. If you train <code>train_model.py</code>
+          on your own labelled dataset, the app automatically switches to your custom model.</p>
+
+          <h5 class="card-title-custom mt-4"><i class="fa-solid fa-layer-group"></i> Architecture</h5>
+          <ul class="about-list">
+            <li>Input &rarr; Conv2D + MaxPooling (&times;3 blocks)</li>
+            <li>BatchNormalization + Dropout for regularization</li>
+            <li>Flatten &rarr; Dense(512) &rarr; Dense(256)</li>
+            <li>Softmax output layer over all classes</li>
+            <li>Adam optimizer with EarlyStopping, ModelCheckpoint, ReduceLROnPlateau</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card app-card">
+        <div class="card-body">
+          <h5 class="card-title-custom"><i class="fa-solid fa-toolbox"></i> Built with</h5>
+          <div class="stack-pills vertical">
+            <span class="pill">Python</span>
+            <span class="pill">Flask</span>
+            <span class="pill">TensorFlow / Keras</span>
+            <span class="pill">OpenCV</span>
+            <span class="pill">SQLAlchemy + SQLite</span>
+            <span class="pill">Bootstrap 5</span>
+            <span class="pill">Chart.js</span>
+            <span class="pill">FPDF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}VisionAI - History{% endblock %}
+
+{% block content %}
+<section class="container page-section">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+    <div>
+      <h2 class="page-title">Prediction History</h2>
+      <p class="page-sub">Every recognized image, searchable and exportable.</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+      <a href="{{ url_for('download_csv') }}" class="btn btn-outline-app"><i class="fa-solid fa-file-csv"></i> Export CSV</a>
+      <form action="{{ url_for('clear_history') }}" method="POST" onsubmit="return confirm('Delete all prediction history? This cannot be undone.');">
+        <button type="submit" class="btn btn-danger-app"><i class="fa-solid fa-trash"></i> Clear All</button>
+      </form>
+    </div>
+  </div>
+
+  <form method="GET" action="{{ url_for('history') }}" class="search-bar mb-4">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" name="q" value="{{ search_query }}" placeholder="Search by predicted class (e.g. cat, car, sunflower)...">
+    {% if search_query %}<a href="{{ url_for('history') }}" class="clear-search"><i class="fa-solid fa-xmark"></i></a>{% endif %}
+  </form>
+
+  {% if records %}
+  <div class="table-responsive app-card p-0">
+    <table class="table app-table align-middle mb-0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Image</th>
+          <th>Prediction</th>
+          <th>Confidence</th>
+          <th>Model</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in records %}
+        <tr>
+          <td>{{ r.id }}</td>
+          <td><a href="{{ url_for('view_result', record_id=r.id) }}"><img src="{{ url_for('static_upload', filename=r.filename) }}" class="history-thumb" alt="{{ r.prediction }}"></a></td>
+          <td class="fw-semibold">{{ r.prediction }}</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar" style="width: {{ r.confidence }}%"></div>
+            </div>
+            {{ r.confidence }}%
+          </td>
+          <td><span class="badge-model">{{ 'Custom' if r.model_used == 'custom' else 'Pretrained' }}</span></td>
+          <td>{{ r.date }}</td>
+          <td>{{ r.time }}</td>
+          <td class="text-end">
+            <a href="{{ url_for('download_report', record_id=r.id) }}" class="icon-btn" title="Download PDF"><i class="fa-solid fa-file-pdf"></i></a>
+            <form action="{{ url_for('delete_record', record_id=r.id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this record?');">
+              <button type="submit" class="icon-btn icon-btn-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <i class="fa-solid fa-box-open empty-icon"></i>
+    <p>No predictions {{ 'match your search' if search_query else 'yet' }}. {% if not search_query %}<a href="{{ url_for('index') }}">Recognize your first image &rarr;</a>{% endif %}</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
