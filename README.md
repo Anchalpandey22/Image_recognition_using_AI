@@ -70,14 +70,9 @@ OpenCV (`cv2`) is still used server-side where it actually belongs: validating t
 
 ---
 
-## 2. Installation
 
-### Step 1 — Clone / unzip and open in VS Code
 
-```bash
-cd AI_Image_Recognition_System
-code .
-```
+
 
 ### Step 2 — Create a virtual environment
 
