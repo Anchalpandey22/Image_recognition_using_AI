@@ -1,6 +1,6 @@
 # VisionAI 
 
-A complete, production-style image recognition web application built with **Flask**, **TensorFlow/Keras**, **OpenCV**, and **Bootstrap 5**. Upload an image, drag-and-drop it, or capture one from your webcam, and get an instant ranked prediction with confidence scores — backed by a real database, history, dashboard, and PDF/CSV exports.
+A complete, production-style image recognition web application built with **Flask**, **TensorFlow/Keras**, **OpenCV**, and **Bootstrap 5**. Upload an image, drag-and-drop it, or capture one from your webcam, and get an instant ranked prediction with confidence scores — backed by a real database, history, dashboard, and PDF/CSV exports. 
  
 ---
 
