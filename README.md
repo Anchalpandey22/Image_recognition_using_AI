@@ -194,7 +194,7 @@ The first request will download MobileNetV2's pretrained weights (~14MB) automat
 
 ## Home Page
 
-![Home Page](Doc/screenshot-home.png)
+
 
 
 ## 8. Notes & Limitations
