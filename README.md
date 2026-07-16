@@ -192,7 +192,7 @@ The first request will download MobileNetV2's pretrained weights (~14MB) automat
 
 > Add your own screenshots here after running the app locally:
 >
-> - `docs/screenshot-home.png` — Recognize page with drag & drop
+> - `doc/screenshot-home.png` — Recognize page with drag & drop
 > - `docs/screenshot-result.png` — Prediction result with top-5 bars
 > - `docs/screenshot-dashboard.png` — Dashboard with charts
 > - `docs/screenshot-history.png` — History table with search
