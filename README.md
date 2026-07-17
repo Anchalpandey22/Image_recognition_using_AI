@@ -190,7 +190,7 @@ The first request will download MobileNetV2's pretrained weights (~14MB) automat
 
 ## 7. Screenshots
 
-> Add your own screenshots here after running the app locally:
+>  screenshots after running the app locally:
 
 ## 📸 Project Screenshots
 
