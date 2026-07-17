@@ -192,7 +192,30 @@ The first request will download MobileNetV2's pretrained weights (~14MB) automat
 
 > Add your own screenshots here after running the app locally:
 
-## Home Page
+## 📸 Project Screenshots
+
+### 🏠 Home Page
+![home](Doc/Screenshot-home.png)
+
+---
+
+### 📊 Dashboard
+![dashboard](Doc/Screenshot-Home2.png)
+
+---
+
+### 📜 History Page
+![history](Doc/Screenshot-history.png)
+
+---
+
+### ℹ️ About Page
+![about](Doc/Screenshot-about.png)
+
+---
+
+### 🌟 Overview
+![overview](Doc/Screenshot-overview.png)
 
 
 
