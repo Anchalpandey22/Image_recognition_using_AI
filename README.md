@@ -4,7 +4,7 @@ A complete, production-style image recognition web application built with **Flas
  
 ---  
 
-## How predictions work (important)
+## How predictions work (important) 
 
 This repository ships with **empty** `dataset/` folders (as requested in the project spec), so there is no training data included. To make sure the app is genuinely usable the moment you install it:
 
