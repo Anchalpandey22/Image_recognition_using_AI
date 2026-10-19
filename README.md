@@ -3,7 +3,7 @@
 A complete, production-style image recognition web application built with **Flask**, **TensorFlow/Keras**, **OpenCV**, and **Bootstrap 5**. Upload an image, drag-and-drop it, or capture one from your webcam, and get an instant ranked prediction with confidence scores — backed by a real database, history, dashboard, and PDF/CSV exports. 
  
 ---  
- 
+  
 ## How predictions work (important) 
 
 This repository ships with **empty** `dataset/` folders (as requested in the project spec), so there is no training data included. To make sure the app is genuinely usable the moment you install it:
