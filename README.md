@@ -5,7 +5,7 @@ A complete, production-style image recognition web application built with **Flas
 ---  
   
 ## How predictions work (important) 
-
+ 
 This repository ships with **empty** `dataset/` folders (as requested in the project spec), so there is no training data included. To make sure the app is genuinely usable the moment you install it:
 
 - **Out of the box**, the app automatically uses a **pretrained MobileNetV2** model (trained on ImageNet, 1,000 real-world classes — including many cats, dogs, car models, and flower species). No training required. Predictions are real and accurate immediately.
